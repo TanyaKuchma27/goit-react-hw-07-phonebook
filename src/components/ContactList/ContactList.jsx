@@ -3,9 +3,9 @@ import { ContactItem } from 'components/ContactItem';
 import { Spinner } from 'components/Spinner';
 import { List, Item } from './ContactList.styled';
 
-export const ContactList = () => {  
-    const { data: contacts, isFetching } = useFetchContactsQuery(); 
-        
+export const ContactList = ({ contacts }) => {  
+    const { isFetching } = useFetchContactsQuery();  
+    
     return (
         <List>
             {isFetching && <Spinner />}
@@ -17,18 +17,3 @@ export const ContactList = () => {
         </List>
     )       
 }
-
-
-    // const contacts = useSelector(getContacts);
-    // const filter = useSelector(getFilter);
-
-    // const getVisibleContacts = () => {
-    //     const normalizedFilter = filter.toLowerCase();
-
-    //     return contacts.filter(contact =>
-    //     contact.name.toLowerCase().includes(normalizedFilter),
-    //     );
-    // };
-
-    // const visibleContacts = getVisibleContacts();
-    // const visibleContacts = contacts;
