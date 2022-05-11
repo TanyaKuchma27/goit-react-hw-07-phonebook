@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import { Field, Text, Input } from './Filter.styled';
 
-export const Filter = ({ filter, onChange }) => {  
-    
+export const Filter = ({ filter, onChange }) => {    
+
     return (
         <Field>
             <Text>Find contacts by name</Text>
             <Input
                 type="text"                
                 value={filter}
-                onChange={onChange}
+                onChange={onChange}                
             />
         </Field>
     );

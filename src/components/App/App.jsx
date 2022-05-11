@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { ContactForm } from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
 import { Container } from './App.styled';
 import { Toaster } from 'react-hot-toast';
-import { useFetchContactsQuery } from 'redux/contactsSlice';
+import { useFetchContactsQuery, getFilter, filterContact } from 'redux/contactsSlice';
 
 export const App = () => { 
   const { data: contacts } = useFetchContactsQuery(); 
-  const [filter, setFilter] = useState('');
+  const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
@@ -22,7 +23,7 @@ export const App = () => {
   };
 
   const changeFilter = e => {
-    setFilter(e.currentTarget.value);
+    dispatch(filterContact(e.target.value));
   }; 
 
   const visibleContacts = getVisibleContacts();
@@ -32,8 +33,8 @@ export const App = () => {
       <h1>Phonebook</h1>
       <ContactForm/>        
       <h2>Contacts</h2>
-      <Filter filter={filter} onChange={changeFilter}/>
-      <ContactList contacts={ visibleContacts }/>
+      <Filter filter={filter} onChange={changeFilter} />
+      <ContactList contacts={ visibleContacts }/>      
       <Toaster position="top-center" />
     </Container>
   );
